@@ -1,0 +1,187 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a genrate id server.\n\n[Learn about Swagger](http://swagger.io) or join the IRC channel `#swagger` on irc.freenode.net.\n\nFor this sample, you can use the api key `special-key` to test the authorization filters\n",
+        "version": "1.0.0",
+        "title": "Swagger Generate Id",
+        "termsOfService": "",
+        "contact": {
+            "name": "abhi@test.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/emp",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Get"
+                ],
+                "summary": "id is generated",
+                "description": "here the id is generated",
+                "operationId": "GenerateId",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "status",
+                        "description": "Status value",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/get"
+                        },
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "Id_auth": [
+                            "write_Id",
+                            "read_Id"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/create": {
+            "post": {
+                "tags": [
+                    "Create"
+                ],
+                "summary": "Add a new record",
+                "description": "",
+                "operationId": "create",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "create",
+                        "description": "object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "okay"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "_auth": [
+                            "write_",
+                            "read_"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        },
+        "_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "http://swagger.com/api/oauth/dialog",
+            "flow": "implicit",
+            "scopes": {
+                "write_": "modify pets in your account",
+                "read_": "read your pets"
+            }
+        }
+    },
+    "definitions": {
+        "get": {
+            "type": "array",
+            "description": "Get description",
+            "required": [
+                "empName",
+                "empEmail",
+                "empMobile"
+            ],
+            "properties": {
+                "empName": {
+                    "type": "string",
+                    "example": "Abhishek"
+                },
+                "empEmail": {
+                    "type": "string",
+                    "example": "abhi@test.com"
+                },
+                "empMobile": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 9988776655
+                }
+            }
+        },
+
+        "create": {
+            "type": "object",
+            "description": "create description",
+            "required": [
+                "empName",
+                "empEmail",
+                "empMobile"
+            ],
+            "properties": {
+                "empName": {
+                    "type": "string",
+                    "example": "Abhishek"
+                },
+                "empEmail": {
+                    "type": "string",
+                    "example": "abhi@test.com"
+                },
+                "empMobile": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 9988776655
+                }
+            }
+        }
+    }
+}
